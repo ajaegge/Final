@@ -1,4 +1,4 @@
-#testing
+#AustralianPhytoplanktonDatabase
 
 P <- as.data.frame(The_Australian_Phytoplankton_Database_1844_2016_abundance_and_biovolume_1_)
 
@@ -21,9 +21,15 @@ PMean <- aggregate(PhytoYears$BIOVOL, by = list(PhytoYears$LATITUDE, PhytoYears$
 
 #write to CSV
 write.csv(PhytoYears, file = "PhytoYears.csv")
-write.csv(PMean, file = "PhytoMeanTest.csv")
+write.csv(PMean, file = "PhytoMean.csv")
 
 
+#Coral Bleaching Events
 
+C <- CoralBleaching
 
+#subset location
+CB <- subset(C, C$COUNTRY == "Australia")
 
+#write to csv
+write.csv(CB, file = "BleachingEventsAus.csv")
