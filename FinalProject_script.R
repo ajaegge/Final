@@ -4,27 +4,25 @@ P <- as.data.frame(The_Australian_Phytoplankton_Database_1844_2016_abundance_and
 
 P$BIOVOL <- P$BIOVOLUME_UM3_L
 
-#Subset data
-x <- P[complete.cases(P$BIOVOL), ]
-
-#P$BIOVOL
-
-#P[is.na(P$BIOVOL)] <- 0
-
-subset(P, P$BIOVOL!="NA")
-
 P$BIOVOL
 
-as.numeric(P$BIOVOLUME_UM3_L)
+#Subset data for missing data
+PhytoB <- P[complete.cases(P$BIOVOL), ]
+as.numeric(PhytoB$BIOVOL)
 
-finalData <- subset(P,!(is.na(data["BIOVOL"])))
+#subset years
+PhytoYears <- subset(PhytoB, PhytoB$SAMPLE_YEAR > 2011 & PhytoB$SAMPLE_YEAR < 2015)
 
- 
 
-#subset data
-PhytoB <-subset(P, )
 
-bar <- subset(foo, location == "there")
+#Calculate total biovolume per sampling site
+PSum <- aggregate(PhytoB$BIOVOL, by = list(PhytoB$LATITUDE, PhytoB$LONGITUDE), FUN = mean)
+
+
+#write to CSV
+write.csv(PSum, file = "PhytoSumTEST.csv")
+
+
 
 
 
