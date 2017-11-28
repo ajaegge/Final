@@ -13,14 +13,15 @@ as.numeric(PhytoB$BIOVOL)
 #subset years
 PhytoYears <- subset(PhytoB, PhytoB$SAMPLE_YEAR > 2011 & PhytoB$SAMPLE_YEAR < 2015)
 
+#normalize data
+PhytoYears$NormalizedBiovol <- log(PhytoYears$BIOVOL)
 
-
-#Calculate total biovolume per sampling site
-PSum <- aggregate(PhytoB$BIOVOL, by = list(PhytoB$LATITUDE, PhytoB$LONGITUDE), FUN = mean)
-
+#Calculate mean biovolume per sampling site
+PMean <- aggregate(PhytoYears$BIOVOL, by = list(PhytoYears$LATITUDE, PhytoYears$LONGITUDE), FUN = mean)
 
 #write to CSV
-write.csv(PSum, file = "PhytoSumTEST.csv")
+write.csv(PhytoYears, file = "PhytoYears.csv")
+write.csv(PMean, file = "PhytoMeanTest.csv")
 
 
 
